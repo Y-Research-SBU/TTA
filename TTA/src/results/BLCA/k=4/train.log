@@ -1,0 +1,443 @@
+Logging to: results/BLCA_uni_survival::uni/BLCA_uni_survival/k=4/TCGA_BLCA_overall_survival::multimodal::uni/TCGA_BLCA_overall_survival::multimodal::uni::25-11-17-01-09-58/train.log
+
+################### Settings ###################
+max_epochs:  30
+lr:  0.0001
+wd:  1e-05
+accum_steps:  1
+opt:  adamW
+lr_scheduler:  cosine
+warmup_steps:  -1
+warmup_epochs:  15
+batch_size:  32
+grad_clip_norm:  5.0
+print_every:  100
+seed:  1
+num_workers:  8
+early_stopping:  1
+es_min_epochs:  5
+es_patience:  30
+es_metric:  loss
+model_type:  otmil_label
+num_coattn_layers:  1
+modality_type:  multi
+fusion_type:  coattn
+dropout:  0.3
+gene_simple_head:  True
+histo_agg:  mean
+omics_dir:  ./data_csvs/rna
+omics_modality:  pathway
+type_of_path:  hallmarks
+in_dim:  1024
+feat_dim_filter:  None
+bag_size:  -1
+train_bag_size:  4096
+val_bag_size:  4096
+loss_fn:  cox
+nll_alpha:  0.5
+loss_warmup_epochs:  0
+use_omics_ot:  True
+omics_proto_num:  16
+omics_ot_impl:  batchot
+use_image_ot:  True
+image_proto_num:  16
+image_ot_impl:  batchot
+enable_image_rho_ramp:  True
+image_feat_norm:  none
+histo_head:  coattn
+enable_omics_rho_ramp:  True
+image_pseudo_label:  1
+omics_pseudo_label:  1
+label_num_coattn_layers:  1
+enable_modality_refine:  1
+modref_weight:  0.5
+modref_tau:  0.1
+modref_layers:  1
+modref_apply_to_tokens:  1
+modref_freeze_epochs:  0
+modref_apply_switch_epoch:  -1
+modref_decay_start:  -1
+modref_decay_epochs:  0
+use_ot_as_weights:  1
+ot_weight_strategy:  mix
+ot_mix_coeff:  0.5
+ot_kl_weight:  0.1
+ot_attn_trainable:  0
+proto_ortho_weight:  0.0
+shared_prototypes:  1
+shared_proto_num:  32
+shared_proto_dim:  256
+shared_tau:  0.5
+joint_ot_single_path:  1
+exp_code:  TCGA_BLCA_overall_survival::multimodal::uni
+task:  BLCA_uni_survival
+target_col:  dss_survival_days
+n_label_bins:  4
+data_source:  ['../../data/tcga_blca_uni/extracted_mag20x_patch256_fp/uni/feats_h5']
+split_dir:  splits/survival/TCGA_BLCA_overall_survival_k=4
+split_names:  train,val,test
+overwrite:  False
+results_dir:  results/BLCA_uni_survival::uni/BLCA_uni_survival/k=4/TCGA_BLCA_overall_survival::multimodal::uni/TCGA_BLCA_overall_survival::multimodal::uni::25-11-17-01-09-58
+tags:  None
+wandb_project:  tta_final
+num_heads:  5
+wsi_use_sk_multi:  1
+wsi_sk_weight:  0.01
+omics_use_sk_multi:  1
+omics_sk_weight:  0.01
+sk_every:  3
+wsi_use_ce:  1
+wsi_ce_weight:  0.5
+omics_use_ce:  1
+omics_ce_weight:  0.5
+rho_strategy:  sigmoid
+rho_base:  0.1
+rho_upper:  1.0
+gamma_schedule:  None
+gamma:  1.0
+ot_constraint:  semi
+assigner:  ot
+kmeans_temp:  0.07
+gamma_base:  1.0
+gamma_upper:  1.0
+mm_factor:  0.1
+split_name_clean:  TCGA_BLCA_overall_survival
+split_k:  4
+pretrain_enc:  uni
+pretrain_algo:  
+pretrain_exp:  
+pretrain_ckpt:  -1
+inference_prec:  fp32
+patch_mag:  20
+patch_size:  256
+feat_dim:  1024
+Using the following split names: ['train', 'val', 'test']
+Gene data loaded: 426 samples
+Sample case_id examples: ['TCGA-BT-A20R', 'TCGA-DK-AA6S', 'TCGA-DK-A6B2', 'TCGA-GU-A763', 'TCGA-XF-A9T4']
+Gene data loaded: 426 samples
+Sample case_id examples: ['TCGA-BT-A20R', 'TCGA-DK-AA6S', 'TCGA-DK-A6B2', 'TCGA-GU-A763', 'TCGA-XF-A9T4']
+Gene data loaded: 426 samples
+Sample case_id examples: ['TCGA-BT-A20R', 'TCGA-DK-AA6S', 'TCGA-DK-A6B2', 'TCGA-GU-A763', 'TCGA-XF-A9T4']
+successfully read splits for:  ['train', 'val', 'test']
+Numeric columns for scaling: 4168
+Non-numeric columns (excluded): ['sample']
+build_datasets: split=train len=288 batch_size=32
+split: train, n: 288
+build_datasets: split=val len=71 batch_size=32
+split: val, n: 71
+build_datasets: split=test len=71 batch_size=32
+split: test, n: 71
+
+Init Model... Model modality: multi; histo_OT=True, omics_OT=True
+ot impl:  shot
+ot impl:  shot
+
+Init optimizer ... 
+Setup EarlyStopping... ########## TRAIN Epoch: 0 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.4492	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 0.1840	avg_omics_ce_loss: 0.2382	avg_modref_loss: 1.3248	avg_surv_loss: 2.8838
+########### VAL Epoch: 0 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 3.1522	avg_surv_loss: 2.8885
+bag_size: 4096.000	loss: 24.418	surv_loss: 24.418	c_index: 0.537
+EarlyStopping warm-up: epoch 1 <= min_stop_epoch 5, skip best-check and patience
+[head-select][wsi] Selected head=0 via SK loss: [3.4581711292266846, 3.459052085876465, 3.459280252456665, 3.4594526290893555, 3.4591400623321533]
+[head-select][omics] Selected head=4 via SK loss: [3.4654154777526855, 3.4654626846313477, 3.465496778488159, 3.46633243560791, 3.4652597904205322]
+#################################### 
+
+########## TRAIN Epoch: 1 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.2989	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 0.2076	avg_omics_ce_loss: 0.2713	avg_modref_loss: 0.9927	avg_surv_loss: 2.7882
+########### VAL Epoch: 1 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 3.0353	avg_surv_loss: 2.8619
+bag_size: 4096.000	loss: 22.654	surv_loss: 22.654	c_index: 0.544
+EarlyStopping warm-up: epoch 2 <= min_stop_epoch 5, skip best-check and patience
+[head-select][wsi] Selected head=1 via SK loss: [3.458571195602417, 3.4568755626678467, 3.4577341079711914, 3.4586124420166016, 3.4593734741210938]
+[head-select][omics] Selected head=4 via SK loss: [3.4653749465942383, 3.4654083251953125, 3.465524911880493, 3.4663662910461426, 3.465304374694824]
+#################################### 
+
+########## TRAIN Epoch: 2 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.2226	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 0.2560	avg_omics_ce_loss: 0.3476	avg_modref_loss: 0.6037	avg_surv_loss: 2.7468
+########### VAL Epoch: 2 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 2.9040	avg_surv_loss: 2.8053
+bag_size: 4096.000	loss: 21.178	surv_loss: 21.178	c_index: 0.551
+EarlyStopping warm-up: epoch 3 <= min_stop_epoch 5, skip best-check and patience
+[head-select][wsi] Selected head=0 via SK loss: [3.4543018341064453, 3.4561424255371094, 3.455167055130005, 3.4558236598968506, 3.456127166748047]
+[head-select][omics] Selected head=2 via SK loss: [3.4656097888946533, 3.4653937816619873, 3.465287208557129, 3.4660701751708984, 3.4654452800750732]
+#################################### 
+
+########## TRAIN Epoch: 3 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.1022	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 0.3463	avg_omics_ce_loss: 0.4274	avg_modref_loss: 0.3256	avg_surv_loss: 2.6109
+########### VAL Epoch: 3 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 2.7963	avg_surv_loss: 2.7455
+bag_size: 4096.000	loss: 17.846	surv_loss: 17.846	c_index: 0.600
+EarlyStopping warm-up: epoch 4 <= min_stop_epoch 5, skip best-check and patience
+[head-select][wsi] Selected head=1 via SK loss: [3.4627208709716797, 3.46235728263855, 3.462827444076538, 3.4623823165893555, 3.4628899097442627]
+[head-select][omics] Selected head=1 via SK loss: [3.465390205383301, 3.464755058288574, 3.464816093444824, 3.4651384353637695, 3.4655468463897705]
+#################################### 
+
+########## TRAIN Epoch: 4 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.0950	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 0.4928	avg_omics_ce_loss: 0.6073	avg_modref_loss: 0.1738	avg_surv_loss: 2.4785
+########### VAL Epoch: 4 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 2.7488	avg_surv_loss: 2.7220
+bag_size: 4096.000	loss: 17.292	surv_loss: 17.292	c_index: 0.660
+EarlyStopping warm-up: epoch 5 <= min_stop_epoch 5, skip best-check and patience
+[head-select][wsi] Selected head=1 via SK loss: [3.4593665599823, 3.457482099533081, 3.4579098224639893, 3.4601528644561768, 3.460317611694336]
+[head-select][omics] Selected head=1 via SK loss: [3.465613842010498, 3.464754343032837, 3.4653539657592773, 3.464906930923462, 3.465709686279297]
+#################################### 
+
+########## TRAIN Epoch: 5 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.1416	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 0.7031	avg_omics_ce_loss: 0.8814	avg_modref_loss: 0.0910	avg_surv_loss: 2.3035
+########### VAL Epoch: 5 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 2.7718	avg_surv_loss: 2.7557
+bag_size: 4096.000	loss: 15.585	surv_loss: 15.585	c_index: 0.668
+score improved (inf --> 15.584575).  Saving model ...
+[head-select][wsi] Selected head=1 via SK loss: [3.456578493118286, 3.4564075469970703, 3.4569454193115234, 3.458230972290039, 3.458062171936035]
+[head-select][omics] Selected head=3 via SK loss: [3.4654500484466553, 3.465425729751587, 3.465714454650879, 3.4645586013793945, 3.466069459915161]
+#################################### 
+
+########## TRAIN Epoch: 6 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.0772	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 0.9686	avg_omics_ce_loss: 1.0605	avg_modref_loss: 0.0620	avg_surv_loss: 2.0241
+########### VAL Epoch: 6 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 2.9330	avg_surv_loss: 2.9221
+bag_size: 4096.000	loss: 14.643	surv_loss: 14.643	c_index: 0.675
+score improved (15.584575 --> 14.642807).  Saving model ...
+[head-select][wsi] Selected head=1 via SK loss: [3.4595439434051514, 3.4589741230010986, 3.4596173763275146, 3.4613759517669678, 3.4607250690460205]
+[head-select][omics] Selected head=3 via SK loss: [3.465627431869507, 3.4669485092163086, 3.465550422668457, 3.4644694328308105, 3.465762138366699]
+#################################### 
+
+########## TRAIN Epoch: 7 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.0965	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 1.2490	avg_omics_ce_loss: 1.3427	avg_modref_loss: 0.0430	avg_surv_loss: 1.7668
+########### VAL Epoch: 7 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 2.9219	avg_surv_loss: 2.9139
+bag_size: 4096.000	loss: 15.846	surv_loss: 15.846	c_index: 0.732
+EarlyStopping counter: 1 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4557905197143555, 3.4544169902801514, 3.4555017948150635, 3.455561876296997, 3.456336259841919]
+[head-select][omics] Selected head=0 via SK loss: [3.465247869491577, 3.4683332443237305, 3.4659597873687744, 3.4658656120300293, 3.466339111328125]
+#################################### 
+
+########## TRAIN Epoch: 8 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.0304	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 1.4903	avg_omics_ce_loss: 1.5089	avg_modref_loss: 0.0314	avg_surv_loss: 1.4999
+########### VAL Epoch: 8 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 3.0587	avg_surv_loss: 3.0524
+bag_size: 4096.000	loss: 14.462	surv_loss: 14.462	c_index: 0.718
+score improved (14.642807 --> 14.462328).  Saving model ...
+[head-select][wsi] Selected head=1 via SK loss: [3.4588091373443604, 3.4550113677978516, 3.456613540649414, 3.4586973190307617, 3.457232713699341]
+[head-select][omics] Selected head=2 via SK loss: [3.465970039367676, 3.469151258468628, 3.465888261795044, 3.4690141677856445, 3.466010093688965]
+#################################### 
+
+########## TRAIN Epoch: 9 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 3.0279	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 1.6306	avg_omics_ce_loss: 1.6267	avg_modref_loss: 0.0259	avg_surv_loss: 1.3697
+########### VAL Epoch: 9 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 3.3086	avg_surv_loss: 3.3032
+bag_size: 4096.000	loss: 14.562	surv_loss: 14.562	c_index: 0.719
+EarlyStopping counter: 1 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4582207202911377, 3.4535655975341797, 3.456402063369751, 3.458261489868164, 3.459213972091675]
+[head-select][omics] Selected head=4 via SK loss: [3.469298839569092, 3.469590187072754, 3.4664902687072754, 3.4715006351470947, 3.4659600257873535]
+#################################### 
+
+########## TRAIN Epoch: 10 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.9137	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 1.6525	avg_omics_ce_loss: 1.6432	avg_modref_loss: 0.0227	avg_surv_loss: 1.2370
+########### VAL Epoch: 10 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 3.5062	avg_surv_loss: 3.5013
+bag_size: 4096.000	loss: 19.287	surv_loss: 19.287	c_index: 0.679
+EarlyStopping counter: 2 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.460461378097534, 3.4524781703948975, 3.4591102600097656, 3.459371566772461, 3.460014581680298]
+[head-select][omics] Selected head=4 via SK loss: [3.472132921218872, 3.4697067737579346, 3.470536231994629, 3.4725868701934814, 3.4673690795898438]
+##################################### 
+
+########## TRAIN Epoch: 11 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.8151	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0347	avg_wsi_ce_loss: 1.6453	avg_omics_ce_loss: 1.5526	avg_modref_loss: 0.0213	avg_surv_loss: 1.1877
+########### VAL Epoch: 11 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 4.1846	avg_surv_loss: 4.1804
+bag_size: 4096.000	loss: 16.677	surv_loss: 16.677	c_index: 0.678
+EarlyStopping counter: 3 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4617764949798584, 3.454108953475952, 3.4611217975616455, 3.460360527038574, 3.4606635570526123]
+[head-select][omics] Selected head=1 via SK loss: [3.4734582901000977, 3.4699745178222656, 3.473767042160034, 3.473252534866333, 3.4738340377807617]
+##################################### 
+
+########## TRAIN Epoch: 12 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.7853	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0348	avg_wsi_ce_loss: 1.6383	avg_omics_ce_loss: 1.5149	avg_modref_loss: 0.0170	avg_surv_loss: 1.1813
+########### VAL Epoch: 12 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 4.3334	avg_surv_loss: 4.3298
+bag_size: 4096.000	loss: 14.923	surv_loss: 14.923	c_index: 0.715
+EarlyStopping counter: 4 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4529170989990234, 3.442786455154419, 3.4524452686309814, 3.4545631408691406, 3.4554717540740967]
+[head-select][omics] Selected head=1 via SK loss: [3.4742960929870605, 3.472289800643921, 3.475057601928711, 3.4738245010375977, 3.4845094680786133]
+##################################### 
+
+########## TRAIN Epoch: 13 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.6306	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0348	avg_wsi_ce_loss: 1.6306	avg_omics_ce_loss: 1.3121	avg_modref_loss: 0.0158	avg_surv_loss: 1.1322
+########### VAL Epoch: 13 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 4.0565	avg_surv_loss: 4.0535
+bag_size: 4096.000	loss: 13.098	surv_loss: 13.098	c_index: 0.712
+score improved (14.462328 --> 13.098431).  Saving model ...
+[head-select][wsi] Selected head=1 via SK loss: [3.456486463546753, 3.440593719482422, 3.453716278076172, 3.4539101123809814, 3.455639600753784]
+[head-select][omics] Selected head=3 via SK loss: [3.4744045734405518, 3.484636068344116, 3.475766181945801, 3.473701000213623, 3.491375207901001]
+##################################### 
+
+########## TRAIN Epoch: 14 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.6624	avg_wsi_instance_loss: 0.0346	avg_omics_instance_loss: 0.0348	avg_wsi_ce_loss: 1.6232	avg_omics_ce_loss: 1.5329	avg_modref_loss: 0.0138	avg_surv_loss: 1.0577
+########### VAL Epoch: 14 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 3.8114	avg_surv_loss: 3.8087
+bag_size: 4096.000	loss: 13.264	surv_loss: 13.264	c_index: 0.688
+EarlyStopping counter: 1 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4605674743652344, 3.4527454376220703, 3.4602012634277344, 3.460615873336792, 3.4602270126342773]
+[head-select][omics] Selected head=0 via SK loss: [3.4746601581573486, 3.4996659755706787, 3.476141929626465, 3.4763662815093994, 3.4944186210632324]
+##################################### 
+
+########## TRAIN Epoch: 15 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.5459	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0349	avg_wsi_ce_loss: 1.6150	avg_omics_ce_loss: 1.4904	avg_modref_loss: 0.0126	avg_surv_loss: 0.9668
+########### VAL Epoch: 15 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 4.0924	avg_surv_loss: 4.0900
+bag_size: 4096.000	loss: 19.918	surv_loss: 19.918	c_index: 0.685
+EarlyStopping counter: 2 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.459033250808716, 3.4393227100372314, 3.4564285278320312, 3.45647931098938, 3.4578542709350586]
+[head-select][omics] Selected head=2 via SK loss: [3.478970527648926, 3.5068604946136475, 3.475881814956665, 3.48760986328125, 3.495392084121704]
+##################################### 
+
+########## TRAIN Epoch: 16 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.5371	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0349	avg_wsi_ce_loss: 1.6055	avg_omics_ce_loss: 1.4919	avg_modref_loss: 0.0114	avg_surv_loss: 0.9622
+########### VAL Epoch: 16 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 4.2045	avg_surv_loss: 4.2025
+bag_size: 4096.000	loss: 21.155	surv_loss: 21.155	c_index: 0.701
+EarlyStopping counter: 3 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.45802903175354, 3.4432859420776367, 3.4566898345947266, 3.457552909851074, 3.456563949584961]
+[head-select][omics] Selected head=2 via SK loss: [3.493220329284668, 3.510031223297119, 3.4797232151031494, 3.4953486919403076, 3.496013879776001]
+##################################### 
+
+########## TRAIN Epoch: 17 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.3653	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0350	avg_wsi_ce_loss: 1.5965	avg_omics_ce_loss: 1.2714	avg_modref_loss: 0.0095	avg_surv_loss: 0.9057
+########### VAL Epoch: 17 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.1683	avg_surv_loss: 5.1666
+bag_size: 4096.000	loss: 16.819	surv_loss: 16.819	c_index: 0.699
+EarlyStopping counter: 4 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.457000970840454, 3.4442646503448486, 3.454922676086426, 3.4564151763916016, 3.4557340145111084]
+[head-select][omics] Selected head=2 via SK loss: [3.5010688304901123, 3.5110578536987305, 3.494776725769043, 3.498286247253418, 3.4962520599365234]
+##################################### 
+
+########## TRAIN Epoch: 18 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.2301	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0350	avg_wsi_ce_loss: 1.5882	avg_omics_ce_loss: 1.1214	avg_modref_loss: 0.0086	avg_surv_loss: 0.8499
+########### VAL Epoch: 18 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 4.5949	avg_surv_loss: 4.5933
+bag_size: 4096.000	loss: 13.153	surv_loss: 13.153	c_index: 0.702
+EarlyStopping counter: 5 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4578781127929688, 3.4393396377563477, 3.4553678035736084, 3.4566948413848877, 3.456822395324707]
+[head-select][omics] Selected head=4 via SK loss: [3.5043394565582275, 3.5115630626678467, 3.5124905109405518, 3.499326705932617, 3.496506929397583]
+##################################### 
+
+########## TRAIN Epoch: 19 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.4133	avg_wsi_instance_loss: 0.0344	avg_omics_instance_loss: 0.0351	avg_wsi_ce_loss: 1.5813	avg_omics_ce_loss: 1.2334	avg_modref_loss: 0.0082	avg_surv_loss: 0.9806
+########### VAL Epoch: 19 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 4.7640	avg_surv_loss: 4.7625
+bag_size: 4096.000	loss: 16.428	surv_loss: 16.428	c_index: 0.704
+EarlyStopping counter: 6 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.451603889465332, 3.425276041030884, 3.4428975582122803, 3.4512832164764404, 3.4499905109405518]
+[head-select][omics] Selected head=4 via SK loss: [3.505209445953369, 3.511702060699463, 3.5247747898101807, 3.500143051147461, 3.4997007846832275]
+##################################### 
+
+########## TRAIN Epoch: 20 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.2095	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0351	avg_wsi_ce_loss: 1.5746	avg_omics_ce_loss: 1.1361	avg_modref_loss: 0.0069	avg_surv_loss: 0.8291
+########### VAL Epoch: 20 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.1370	avg_surv_loss: 5.1356
+bag_size: 4096.000	loss: 15.274	surv_loss: 15.274	c_index: 0.701
+EarlyStopping counter: 7 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4601573944091797, 3.435155153274536, 3.4557101726531982, 3.4557552337646484, 3.458054304122925]
+[head-select][omics] Selected head=3 via SK loss: [3.50563383102417, 3.5120248794555664, 3.5295093059539795, 3.4999806880950928, 3.50982928276062]
+##################################### 
+
+########## TRAIN Epoch: 21 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.1899	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0351	avg_wsi_ce_loss: 1.5692	avg_omics_ce_loss: 1.2447	avg_modref_loss: 0.0066	avg_surv_loss: 0.7580
+########### VAL Epoch: 21 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.4324	avg_surv_loss: 5.4312
+bag_size: 4096.000	loss: 16.878	surv_loss: 16.878	c_index: 0.683
+EarlyStopping counter: 8 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.459397077560425, 3.426025152206421, 3.4565038681030273, 3.4573957920074463, 3.4581305980682373]
+[head-select][omics] Selected head=3 via SK loss: [3.505660057067871, 3.5117745399475098, 3.5307939052581787, 3.5022106170654297, 3.5190207958221436]
+##################################### 
+
+########## TRAIN Epoch: 22 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.1116	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5642	avg_omics_ce_loss: 1.1644	avg_modref_loss: 0.0056	avg_surv_loss: 0.7225
+########### VAL Epoch: 22 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.4590	avg_surv_loss: 5.4579
+bag_size: 4096.000	loss: 20.166	surv_loss: 20.166	c_index: 0.685
+EarlyStopping counter: 9 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4585447311401367, 3.432281732559204, 3.4549567699432373, 3.4565651416778564, 3.456341028213501]
+[head-select][omics] Selected head=0 via SK loss: [3.5058162212371826, 3.5120127201080322, 3.531484365463257, 3.5098414421081543, 3.522549629211426]
+##################################### 
+
+########## TRAIN Epoch: 23 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.0458	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5605	avg_omics_ce_loss: 1.1873	avg_modref_loss: 0.0055	avg_surv_loss: 0.6472
+########### VAL Epoch: 23 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.3397	avg_surv_loss: 5.3386
+bag_size: 4096.000	loss: 20.165	surv_loss: 20.165	c_index: 0.696
+EarlyStopping counter: 10 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4585444927215576, 3.433617353439331, 3.4528751373291016, 3.455195426940918, 3.455958127975464]
+[head-select][omics] Selected head=0 via SK loss: [3.5077593326568604, 3.512206554412842, 3.5315723419189453, 3.5169782638549805, 3.523866891860962]
+##################################### 
+
+########## TRAIN Epoch: 24 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.1004	avg_wsi_instance_loss: 0.0344	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5571	avg_omics_ce_loss: 1.1394	avg_modref_loss: 0.0053	avg_surv_loss: 0.7275
+########### VAL Epoch: 24 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.8101	avg_surv_loss: 5.8091
+bag_size: 4096.000	loss: 15.268	surv_loss: 15.268	c_index: 0.691
+EarlyStopping counter: 11 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4520328044891357, 3.411834716796875, 3.445526361465454, 3.448099374771118, 3.45072340965271]
+[head-select][omics] Selected head=1 via SK loss: [3.512889862060547, 3.511992931365967, 3.5318658351898193, 3.5195584297180176, 3.5241315364837646]
+##################################### 
+
+########## TRAIN Epoch: 25 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 1.9841	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5545	avg_omics_ce_loss: 1.1057	avg_modref_loss: 0.0053	avg_surv_loss: 0.6293
+########### VAL Epoch: 25 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.6689	avg_surv_loss: 5.6679
+bag_size: 4096.000	loss: 15.151	surv_loss: 15.151	c_index: 0.683
+EarlyStopping counter: 12 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4574978351593018, 3.4296457767486572, 3.452695846557617, 3.4537136554718018, 3.4549901485443115]
+[head-select][omics] Selected head=1 via SK loss: [3.516667366027832, 3.5127639770507812, 3.5317747592926025, 3.5204503536224365, 3.524224042892456]
+##################################### 
+
+########## TRAIN Epoch: 26 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 2.0616	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5530	avg_omics_ce_loss: 1.0938	avg_modref_loss: 0.0053	avg_surv_loss: 0.7135
+########### VAL Epoch: 26 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.6228	avg_surv_loss: 5.6218
+bag_size: 4096.000	loss: 15.187	surv_loss: 15.187	c_index: 0.692
+EarlyStopping counter: 13 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4599106311798096, 3.4336516857147217, 3.4561195373535156, 3.456073045730591, 3.4581425189971924]
+[head-select][omics] Selected head=1 via SK loss: [3.5176498889923096, 3.514739513397217, 3.531230926513672, 3.520380973815918, 3.5240085124969482]
+##################################### 
+
+########## TRAIN Epoch: 27 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 1.8659	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5520	avg_omics_ce_loss: 1.0857	avg_modref_loss: 0.0050	avg_surv_loss: 0.5225
+########### VAL Epoch: 27 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.5183	avg_surv_loss: 5.5173
+bag_size: 4096.000	loss: 15.158	surv_loss: 15.158	c_index: 0.698
+EarlyStopping counter: 14 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.4585416316986084, 3.4254086017608643, 3.4513275623321533, 3.452770471572876, 3.4546782970428467]
+[head-select][omics] Selected head=1 via SK loss: [3.5179073810577393, 3.5162546634674072, 3.5314693450927734, 3.5205819606781006, 3.524198293685913]
+##################################### 
+
+########## TRAIN Epoch: 28 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 1.9682	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5515	avg_omics_ce_loss: 1.0809	avg_modref_loss: 0.0051	avg_surv_loss: 0.6273
+########### VAL Epoch: 28 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.5516	avg_surv_loss: 5.5507
+bag_size: 4096.000	loss: 15.181	surv_loss: 15.181	c_index: 0.701
+EarlyStopping counter: 15 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.457385301589966, 3.420635461807251, 3.451281785964966, 3.451235055923462, 3.4528350830078125]
+[head-select][omics] Selected head=1 via SK loss: [3.517763376235962, 3.517482280731201, 3.5314879417419434, 3.5200865268707275, 3.524167060852051]
+##################################### 
+
+########## TRAIN Epoch: 29 ##########
+batch 8	avg_bag_size: 4096.0000	avg_loss: 1.9344	avg_wsi_instance_loss: 0.0345	avg_omics_instance_loss: 0.0352	avg_wsi_ce_loss: 1.5514	avg_omics_ce_loss: 1.0799	avg_modref_loss: 0.0051	avg_surv_loss: 0.5941
+########### VAL Epoch: 29 ###########
+batch 2	avg_bag_size: 4096.0000	avg_loss: 5.6006	avg_surv_loss: 5.5996
+bag_size: 4096.000	loss: 15.258	surv_loss: 15.258	c_index: 0.699
+EarlyStopping counter: 16 out of 30
+[head-select][wsi] Selected head=1 via SK loss: [3.457659959793091, 3.426964521408081, 3.4542312622070312, 3.4557857513427734, 3.4550678730010986]
+[head-select][omics] Selected head=1 via SK loss: [3.5182383060455322, 3.5176641941070557, 3.531693458557129, 3.5205607414245605, 3.524399757385254]
+##################################### 
+
+End of training. Evaluating LAST on Split TRAIN...:
+End of training. Evaluating LAST on Split TEST...:
+End of training. Evaluating BEST on Split TRAIN...:
+End of training. Evaluating BEST on Split TEST...:
+[fold-agg] Aggregated 8 numeric metrics across 5 folds -> results/BLCA_uni_survival::uni/BLCA_uni_survival/k=agg/TCGA_BLCA_overall_survival::multimodal::uni/fold_summary__25-11-17-01-28-41.csv
+FINISHED!
+
+

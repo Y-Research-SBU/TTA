@@ -1,0 +1,2 @@
+bag_size_best_test,loss_best_test,surv_loss_best_test,c_index_best_test,bag_size_last_test,loss_last_test,surv_loss_last_test,c_index_last_test
+4096.0,13.07406234741211,13.07406234741211,0.7179856115107913,4096.0,15.167975425720215,15.167975425720215,0.6949640287769784

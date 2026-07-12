@@ -1,0 +1,11 @@
+**/__pycache__/
+**/*.pyc
+**/wandb/
+**/embeddings/
+.ipynb_checkpoints/
+.DS_Store
+.vscode/
+
+# Local datasets are kept outside git.
+data/*
+!data/README.md
