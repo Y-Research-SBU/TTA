@@ -176,37 +176,20 @@ Most experiment settings can be changed directly in `TTA/src/scripts/survival/tt
 - `fusion_type`: `coattn` is the main setting; `concat`, `sum`, and `mlp` are late-fusion variants.
 - `ot_mode`: `ubot` is the main setting; `balanced`, `ubot_fixed_rho`, and `kmeans` correspond to OT assignment ablations.
 - `use_ot_as_weights` and soft CE are different mechanisms: `use_ot_as_weights` changes token pooling weights, while soft CE adds an auxiliary training signal that encourages assignment logits to match OT pseudo labels.
-- `num_heads<=1` disables the multi-head Sinkhorn consistency path.
 
 ### Additional Default Settings
 
-The following values are default implementation and training settings used by the main experiments.
+The following are important default settings.
 
 | Argument | Main value | Description |
 | --- | --- | --- |
 | `shared_proto_dim` | `256` | Shared prototype dimension. |
-| `shared_tau` | `0.5` | Temperature for shared prototype assignment. |
 | `ot_mix_coeff` | `0.5` | Mixing coefficient between softmax weights and OT weights. |
 | `ot_kl_weight` | `0.1` | OT regularization weight. |
 | `wsi_ce_weight` | `0.5` | WSI auxiliary CE weight. |
 | `omics_ce_weight` | `0.5` | Omics auxiliary CE weight. |
 | `modref_weight` | `0.5` | Modality-context refinement loss weight. |
-| `modref_tau` | `0.1` | Modality-context refinement temperature. |
-| `modref_layers` | `1` | Number of refinement layers. |
-| `num_heads` | `5` | Number of Sinkhorn heads. |
-| `label_num_coattn_layers` | `1` | Label/prototype co-attention depth. |
-| `batch_size` | `32` | Training batch size. |
-| `train_bag_size` | `4096` | WSI token sampling or padding size for training. |
-| `val_bag_size` | `4096` | WSI token sampling or padding size for validation/testing. |
-| `max_epochs` | `30` | Maximum number of epochs. |
-| `lr` | `1e-4` | Learning rate. |
-| `wd` | `1e-5` | Weight decay. |
-| `opt` | `adamW` | Optimizer. |
-| `lr_scheduler` | `cosine` | Learning-rate scheduler. |
-| `warmup_epochs` | `15` | Warmup used with non-constant schedulers. |
-| `dropout` | `0.3` | Dropout rate. |
 | `loss_fn` | `cox` | Survival objective. |
-| `grad_clip_norm` | `5.0` | Gradient clipping norm. |
 
 ## Outputs
 

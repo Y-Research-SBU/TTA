@@ -201,17 +201,6 @@ blockquote {
   margin: 8px 0;
 }
 
-.pipeline-steps {
-  margin: 10px 0 14px;
-  padding-left: 1.7em;
-  line-height: 1.55;
-  text-align: left;
-}
-
-.pipeline-steps li {
-  margin: 5px 0;
-}
-
 .method-highlights {
   display: grid;
   grid-template-columns: 1fr;
