@@ -1,13 +1,45 @@
-# Together, Then Apart: Balancing Alignment and Distinctiveness for Multimodal Survival Analysis
+<div align="center">
 
-[![Paper](https://img.shields.io/badge/Paper-ArXiv%202511.18089-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2511.18089)
-[![Project](https://img.shields.io/badge/Project-Website-0877c9?style=for-the-badge&logo=googlechrome&logoColor=white)](https://y-research-sbu.github.io/TTA)
-[![Code](https://img.shields.io/badge/GitHub-Code-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Y-Research-SBU/TTA)
-[![Dataset](https://img.shields.io/badge/HuggingFace-Dataset-ff9d00?style=for-the-badge&logo=huggingface&logoColor=white)](https://huggingface.co/datasets/LIUWJ/Data_TMI)
+<h1>Together, Then Apart:<br/>Balancing Alignment and Distinctiveness for Multimodal Survival Analysis</h1>
 
-TTA is a multimodal survival analysis framework for Whole Slide Images (WSIs) and transcriptomics. In multimodal prognosis, histopathology and genomic profiles should agree on shared survival-relevant factors, but each modality also carries distinct evidence. Over-aligning the two modalities can erase modality-specific prognostic signals and produce less discriminative patient representations.
+<p>
+  <a href="https://liuwj003.github.io/">Wenjing Liu</a><sup>1,2,*</sup>&nbsp;
+  <a href="https://soonera.github.io/qinren/">Qin Ren</a><sup>1,*</sup>&nbsp;
+  <a href="https://kkwenz.github.io/">Wen Zhang</a><sup>1,3</sup>&nbsp;
+  <a href="https://ywlincq.github.io/">Yuewei Lin</a><sup>4</sup>&nbsp;
+  <a href="https://chenyuyou.me/">Chenyu You</a><sup>1</sup>
+</p>
 
-TTA addresses this with a **Together, Then Apart** design. The **Together** stage aligns WSI patch tokens and omics tokens through shared prototypes and joint unbalanced optimal transport, producing structured prototype-level representations instead of relying on noisy token-level matching. The **Apart** stage then preserves modality-specific information with modality-context refinement and distinctiveness regularization before multimodal survival prediction. This repository contains the code, example outputs, and code documentation for reproducing the paper experiments.
+<p>
+  <sup>1</sup>Stony Brook University &nbsp;
+  <sup>2</sup>Stanford University &nbsp;
+  <sup>3</sup>Johns Hopkins University &nbsp;
+  <sup>4</sup>Brookhaven National Laboratory<br/>
+  <sup>*</sup>Equal contribution
+</p>
+
+<p>
+  <a href="https://arxiv.org/pdf/2511.18089">
+    <img src="https://img.shields.io/badge/arXiv-2511.18089-B31B1B?style=flat-square&logo=arxiv" alt="arXiv">
+  </a>
+  <a href="https://y-research-sbu.github.io/TTA/">
+    <img src="https://img.shields.io/badge/Project-Page-4285F4?style=flat-square&logo=googlechrome" alt="Project Page">
+  </a>
+  <a href="https://github.com/Y-Research-SBU/TTA">
+    <img src="https://img.shields.io/badge/GitHub-Code-2EA44F?style=flat-square&logo=github" alt="GitHub Code">
+  </a>
+  <a href="https://huggingface.co/datasets/LIUWJ/Data_TMI">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Dataset-F9A825?style=flat-square&logo=huggingface" alt="Hugging Face Dataset">
+  </a>
+</p>
+
+</div>
+
+---
+
+## Method
+
+TTA is a multimodal survival framework for whole-slide images and transcriptomics. **Together** aligns shared prognostic structure through a common prototype bank and joint unbalanced optimal transport; **Apart** preserves complementary, modality-specific evidence with anchor-guided contrastive regularization. The resulting representations are fused for survival prediction.
 
 ![TTA method overview](docs/assets/TTA-method.png)
 
@@ -122,68 +154,46 @@ bash ./scripts/survival/brca_uni_surv.sh 0 tta
 
 ## Important Configuration Switches
 
-Most experiment settings can be changed directly in `TTA/src/scripts/survival/tta.sh`. This section highlights the switches most relevant to the TTA pipeline and ablations; ordinary runtime defaults are listed afterward.
+Most experiment settings can be changed directly in `TTA/src/scripts/survival/tta.sh`. The table below lists the switches most relevant to the TTA pipeline and ablations.
 
 ### Core TTA Switches
 
 | Argument | Main value | Description |
 | --- | --- | --- |
 | `modality_type` | `multi` | Use both WSI and omics modalities.|
-| `model_type` | `otmil_label` | TTA model implementation. |
 | `fusion_type` | `coattn` | Apply co-attention over prototype tokens. `concat`, `sum`, and `mlp` are late-fusion alternatives. |
 | `shared_prototypes` | `1` | Use one shared prototype bank for WSI and omics tokens in the Together stage. |
 | `shared_proto_num` | `32` | Number of shared prototypes used by the main model. |
 | `joint_ot_single_path` | `1` | Compute OT assignments once on concatenated WSI and omics tokens, then split assignments back by modality. Setting `0` computes modality-specific OT assignments separately. |
 | `ot_mode` | `ubot` | Use unbalanced OT. `balanced` disables the semi-relaxed/unbalanced behavior; `ubot_fixed_rho` uses a fixed rho value; `kmeans` is the hard-assignment ablation. |
-| `image_pseudo_label` | `1` | Enable OT-based soft assignments for WSI tokens. For the `kmeans` ablation, set this to `0`. |
-| `omics_pseudo_label` | `1` | Enable OT-based soft assignments for omics tokens. For the `kmeans` ablation, set this to `0`. |
 | `use_ot_as_weights` | `1` | Use OT-produced assignments as token-to-prototype aggregation weights. This changes how tokens are pooled into prototype tokens. |
-| `ot_weight_strategy` | `mix` | Blend OT assignment weights with softmax assignment weights for stability. With `replace`, OT weights fully replace softmax weights. |
 | `enable_modality_refine` | `1` | Enable the Apart-stage modality-context refinement. |
-| `modref_apply_to_tokens` | `1` | Use refined tokens for downstream prediction. If set to `0`, the refinement loss is computed but the original tokens are kept for downstream prediction. |
 
-OT pseudo labels provide structured soft assignments from tokens to prototypes, supporting the Together-stage prototype alignment described in the paper.
+**Reference pipeline.** UOT pseudo-label generation, instance-level soft CE, and multi-head Sinkhorn consistency are enabled for both WSI and omics in the released `tta.sh` configuration. These paths are fixed for the main model, with a consistency weight of `0.01` per modality.
 
 ### Ablation-Related Notes
 
 - `fusion_type`: `coattn` is the main setting; `concat`, `sum`, and `mlp` are late-fusion variants.
 - `ot_mode`: `ubot` is the main setting; `balanced`, `ubot_fixed_rho`, and `kmeans` correspond to OT assignment ablations.
-- `kmeans` ablation: disable the OT pseudo-label and OT-as-weights paths together (`image_pseudo_label=0`, `omics_pseudo_label=0`, `use_ot_as_weights=0`).
 - `use_ot_as_weights` and soft CE are different mechanisms: `use_ot_as_weights` changes token pooling weights, while soft CE adds an auxiliary training signal that encourages assignment logits to match OT pseudo labels.
 - `num_heads<=1` disables the multi-head Sinkhorn consistency path.
 
 ### Additional Default Settings
 
-The following values are default implementation and training settings used by the main experiments. They have clear runtime meanings, but they are not the primary switches behind the reported method comparisons.
+The following values are default implementation and training settings used by the main experiments.
 
 | Argument | Main value | Description |
 | --- | --- | --- |
 | `shared_proto_dim` | `256` | Shared prototype dimension. |
 | `shared_tau` | `0.5` | Temperature for shared prototype assignment. |
-| `image_proto_num` | `16` | Number of image prototypes. |
-| `omics_proto_num` | `16` | Number of omics prototypes. |
-| `image_ot_impl` | `batchot` | Image-side OT solver. |
-| `omics_ot_impl` | `batchot` | Omics-side OT solver. |
-| `enable_image_rho_ramp` | `1` | Enable image-side rho ramp for stable OT assignment. |
-| `enable_omics_rho_ramp` | `1` | Enable omics-side rho ramp for stable OT assignment. |
-| `image_feat_norm` | `none` | Image feature normalization. |
 | `ot_mix_coeff` | `0.5` | Mixing coefficient between softmax weights and OT weights. |
 | `ot_kl_weight` | `0.1` | OT regularization weight. |
-| `wsi_use_ce` | `1` | Add WSI auxiliary soft cross-entropy against OT assignments. |
-| `omics_use_ce` | `1` | Add omics auxiliary soft cross-entropy against OT assignments. |
 | `wsi_ce_weight` | `0.5` | WSI auxiliary CE weight. |
 | `omics_ce_weight` | `0.5` | Omics auxiliary CE weight. |
 | `modref_weight` | `0.5` | Modality-context refinement loss weight. |
 | `modref_tau` | `0.1` | Modality-context refinement temperature. |
 | `modref_layers` | `1` | Number of refinement layers. |
 | `num_heads` | `5` | Number of Sinkhorn heads. |
-| `wsi_use_sk_multi` | `1` | Enable WSI multi-head Sinkhorn consistency. |
-| `omics_use_sk_multi` | `1` | Enable omics multi-head Sinkhorn consistency. |
-| `wsi_sk_weight` | `0.01` | Small auxiliary weight for enabling WSI multi-head Sinkhorn consistency without letting it dominate the Cox survival objective. |
-| `omics_sk_weight` | `0.01` | Small auxiliary weight for enabling omics multi-head Sinkhorn consistency without letting it dominate the Cox survival objective. |
-| `sk_every` | `3` | Compute the consistency loss every 3 batches to reduce training overhead. |
-| `histo_head` | `coattn` | Histology branch head. |
-| `num_coattn_layers` | `1` | Multimodal co-attention depth. |
 | `label_num_coattn_layers` | `1` | Label/prototype co-attention depth. |
 | `batch_size` | `32` | Training batch size. |
 | `train_bag_size` | `4096` | WSI token sampling or padding size for training. |
@@ -196,17 +206,7 @@ The following values are default implementation and training settings used by th
 | `warmup_epochs` | `15` | Warmup used with non-constant schedulers. |
 | `dropout` | `0.3` | Dropout rate. |
 | `loss_fn` | `cox` | Survival objective. |
-| `n_label_bins` | `4` | Number of discrete survival bins. |
-| `nll_alpha` | `0.5` | NLL alpha value passed by the wrapper. |
-| `early_stopping` | `1` | Enable early stopping. |
-| `es_min_epochs` | `5` | Minimum epochs before early stopping. |
-| `es_patience` | `30` | Early-stopping patience. |
-| `es_metric` | `loss` | Early-stopping metric. |
-| `seed` | `1` | Random seed. |
-| `num_workers` | `8` | Data-loader workers. |
 | `grad_clip_norm` | `5.0` | Gradient clipping norm. |
-| `save_dir_root` | `results` | Output directory root under `TTA/src`. |
-| `IN_DIM_OVERRIDE` | optional | Override feature dimension when using another encoder. |
 
 ## Outputs
 
