@@ -136,7 +136,6 @@
         <table class="results-table">
           <thead>
             <tr>
-              <th>Modal.</th>
               <th>Model</th>
               <th>BRCA</th>
               <th>BLCA</th>
@@ -147,37 +146,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="modality-cell" rowspan="2">g.</td>
-              <td>SNN</td><td>0.619 &plusmn; 0.063</td><td>0.618 &plusmn; 0.027</td><td>0.557 &plusmn; 0.072</td><td>0.576 &plusmn; 0.102</td><td>0.689 &plusmn; 0.098</td><td>0.611</td>
-            </tr>
-            <tr>
-              <td>SNNTrans</td><td>0.630 &plusmn; 0.062</td><td>0.622 &plusmn; 0.038</td><td>0.559 &plusmn; 0.070</td><td>0.570 &plusmn; 0.098</td><td>0.698 &plusmn; 0.126</td><td>0.616</td>
-            </tr>
-
-            <tr class="group-start">
-              <td class="modality-cell" rowspan="7">h.</td>
-              <td>ABMIL</td><td>0.566 &plusmn; 0.097</td><td>0.553 &plusmn; 0.052</td><td>0.566 &plusmn; 0.033</td><td>0.655 &plusmn; 0.118</td><td>0.675 &plusmn; 0.124</td><td>0.603</td>
-            </tr>
-            <tr><td>CLAM</td><td>0.627 &plusmn; 0.188</td><td>0.618 &plusmn; 0.104</td><td>0.538 &plusmn; 0.077</td><td>0.629 &plusmn; 0.132</td><td>0.670 &plusmn; 0.124</td><td>0.616</td></tr>
-            <tr><td>HIPT</td><td>0.566 &plusmn; 0.092</td><td>0.606 &plusmn; 0.126</td><td>0.529 &plusmn; 0.074</td><td>0.600 &plusmn; 0.066</td><td>0.685 &plusmn; 0.099</td><td>0.597</td></tr>
-            <tr><td>AttnMISL</td><td>0.585 &plusmn; 0.073</td><td>0.533 &plusmn; 0.065</td><td>0.541 &plusmn; 0.052</td><td><strong class="best">0.723 &plusmn; 0.111</strong></td><td>0.656 &plusmn; 0.112</td><td>0.607</td></tr>
-            <tr><td>TransMIL</td><td>0.599 &plusmn; 0.056</td><td>0.595 &plusmn; 0.102</td><td>0.500 &plusmn; 0.060</td><td>0.550 &plusmn; 0.143</td><td>0.676 &plusmn; 0.132</td><td>0.584</td></tr>
-            <tr><td>OTSurv</td><td>0.625 &plusmn; 0.071</td><td>0.637 &plusmn; 0.065</td><td>0.556 &plusmn; 0.057</td><td>0.663 &plusmn; 0.102</td><td>0.739 &plusmn; 0.149</td><td>0.644</td></tr>
-            <tr><td>PANTHER</td><td>0.643 &plusmn; 0.128</td><td>0.593 &plusmn; 0.083</td><td>0.503 &plusmn; 0.082</td><td>0.639 &plusmn; 0.133</td><td>0.700 &plusmn; 0.124</td><td>0.615</td></tr>
-
-            <tr class="group-start">
-              <td class="modality-cell" rowspan="9">g.+h.</td>
-              <td>MCAT</td><td>0.650 &plusmn; 0.096</td><td>0.623 &plusmn; 0.055</td><td>0.528 &plusmn; 0.112</td><td>0.579 &plusmn; 0.134</td><td>0.699 &plusmn; 0.121</td><td>0.615</td>
-            </tr>
+            <tr><td>MCAT</td><td>0.650 &plusmn; 0.096</td><td>0.623 &plusmn; 0.055</td><td>0.528 &plusmn; 0.112</td><td>0.579 &plusmn; 0.134</td><td>0.699 &plusmn; 0.121</td><td>0.615</td></tr>
             <tr><td>CMTA</td><td>0.687 &plusmn; 0.077</td><td>0.622 &plusmn; 0.056</td><td>0.539 &plusmn; 0.076</td><td>0.568 &plusmn; 0.102</td><td>0.711 &plusmn; 0.121</td><td>0.625</td></tr>
             <tr><td>MOTCat</td><td>0.717 &plusmn; 0.058</td><td>0.631 &plusmn; 0.059</td><td>0.576 &plusmn; 0.075</td><td>0.598 &plusmn; 0.128</td><td>0.708 &plusmn; 0.109</td><td>0.646</td></tr>
             <tr><td>SurvPath</td><td>0.696 &plusmn; 0.061</td><td>0.619 &plusmn; 0.051</td><td>0.555 &plusmn; 0.133</td><td>0.588 &plusmn; 0.134</td><td>0.742 &plusmn; 0.101</td><td>0.640</td></tr>
             <tr><td>PIBD</td><td>0.683 &plusmn; 0.056</td><td>0.661 &plusmn; 0.034</td><td>0.552 &plusmn; 0.054</td><td>0.582 &plusmn; 0.077</td><td>0.732 &plusmn; 0.139</td><td>0.642</td></tr>
-            <tr><td>MRePath</td><td>0.703 &plusmn; 0.036</td><td>0.651 &plusmn; 0.060</td><td>0.579 &plusmn; 0.062</td><td>0.639 &plusmn; 0.101</td><td>0.743 &plusmn; 0.112</td><td>0.663</td></tr>
+            <tr><td>MRePath</td><td>0.703 &plusmn; 0.036</td><td>0.651 &plusmn; 0.060</td><td>0.579 &plusmn; 0.062</td><td><span class="second">0.639 &plusmn; 0.101</span></td><td>0.743 &plusmn; 0.112</td><td>0.663</td></tr>
             <tr><td>MMP</td><td><span class="second">0.724 &plusmn; 0.067</span></td><td>0.640 &plusmn; 0.050</td><td><span class="second">0.594 &plusmn; 0.066</span></td><td>0.634 &plusmn; 0.118</td><td>0.743 &plusmn; 0.133</td><td><span class="second">0.667</span></td></tr>
             <tr><td>LD-CVAE</td><td>0.709 &plusmn; 0.047</td><td><strong class="best">0.676 &plusmn; 0.035</strong></td><td>0.589 &plusmn; 0.083</td><td>0.602 &plusmn; 0.120</td><td><span class="second">0.751 &plusmn; 0.139</span></td><td>0.665</td></tr>
-            <tr class="ours"><td>TTA (Ours)</td><td><strong class="best">0.726 &plusmn; 0.039</strong></td><td><span class="second">0.662 &plusmn; 0.079</span></td><td><strong class="best">0.613 &plusmn; 0.079</strong></td><td><span class="second">0.685 &plusmn; 0.131</span></td><td><strong class="best">0.778 &plusmn; 0.117</strong></td><td><strong class="best">0.693</strong></td></tr>
+            <tr class="ours"><td>TTA (Ours)</td><td><strong class="best">0.726 &plusmn; 0.039</strong></td><td><span class="second">0.662 &plusmn; 0.079</span></td><td><strong class="best">0.613 &plusmn; 0.079</strong></td><td><strong class="best">0.685 &plusmn; 0.131</strong></td><td><strong class="best">0.778 &plusmn; 0.117</strong></td><td><strong class="best">0.693</strong></td></tr>
           </tbody>
         </table>
       </div>

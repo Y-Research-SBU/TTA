@@ -318,7 +318,7 @@ td:nth-child(2) {
 }
 
 .results-table {
-  min-width: 1080px;
+  min-width: 900px;
   font-size: 12.8px;
 }
 
@@ -328,20 +328,8 @@ td:nth-child(2) {
 }
 
 .results-table th:first-child,
-.results-table th:nth-child(2),
-.results-table td:first-child,
-.results-table .modality-cell + td {
+.results-table td:first-child {
   text-align: left;
-}
-
-.results-table .modality-cell {
-  font-weight: 600;
-  vertical-align: middle;
-  text-align: left;
-}
-
-.results-table tr.group-start > * {
-  border-top: 2px solid var(--line);
 }
 
 .results-table .best {
